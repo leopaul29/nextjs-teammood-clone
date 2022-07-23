@@ -1,30 +1,30 @@
 const { PrismaClient } = require('@prisma/client');
-const { categories, products } = require('./data.js');
+const { users, projects } = require('./data.js');
 const prisma = new PrismaClient();
 
 const load = async () => {
   try {
-    await prisma.category.deleteMany();
+    await prisma.user.deleteMany();
     console.log('Deleted records in category table');
 
-    await prisma.product.deleteMany();
-    console.log('Deleted records in product table');
+    await prisma.project.deleteMany();
+    console.log('Deleted records in project table');
 
-    await prisma.$queryRaw`ALTER TABLE Product AUTO_INCREMENT = 1`;
-    console.log('reset product auto increment to 1');
+    await prisma.$queryRaw`ALTER TABLE Project AUTO_INCREMENT = 1`;
+    console.log('reset project auto increment to 1');
 
-    await prisma.$queryRaw`ALTER TABLE Category AUTO_INCREMENT = 1`;
-    console.log('reset category auto increment to 1');
+    await prisma.$queryRaw`ALTER TABLE User AUTO_INCREMENT = 1`;
+    console.log('reset user auto increment to 1');
 
-    await prisma.category.createMany({
-      data: categories,
+    await prisma.user.createMany({
+      data: users,
     });
-    console.log('Added category data');
+    console.log('Added user data');
 
-    await prisma.product.createMany({
-      data: products,
+    await prisma.project.createMany({
+      data: projects,
     });
-    console.log('Added product data');
+    console.log('Added project data');
   } catch (e) {
     console.error(e);
     process.exit(1);
