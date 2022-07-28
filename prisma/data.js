@@ -1,30 +1,42 @@
-const { Prisma } = require('@prisma/client');
+const {
+  Prisma
+} = require('@prisma/client');
 
-const users = [
-  {
-    username: 'Hats',
+const users = [{
+    //"company": "Kuhic, Haley and Bosco",
+    "username": "Dalton.Connelly",
+    //"role": "user",
   },
   {
-    username: 'Socks',
+    //"company": "MacGyver Inc",
+    "username": "Keagan33",
+    //"role": "user",
   },
   {
-    username: 'Shirts',
+    //"company": "Rutherford, Stamm and Hickle",
+    "username": "Anika_Watsica",
+    //"role": "administrator",
   },
+  {
+    //"company": "Ward - Medhurst",
+    "username": "Muhammad.Ritchie4",
+    //"role": "administrator"
+  }, {
+    //"company": "Beatty and Sons",
+    "username": "Cloyd19",
+    //"role": "administrator",
+  }
 ];
 
-const projects = [
-  {
-    name: 'Cool helmet.',
+const projects = [{
+    name: 'HUSKY ADVICE',
   },
   {
-    name: 'Grey T-Shirt',
+    name: 'BEST ENGINE',
   },
   {
-    name: 'Socks',
-  },
-  {
-    name: 'Sweatshirt',
-  },
+    name: 'BIG EFFICACIOUS CORN',
+  }
 ];
 
 module.exports = {
