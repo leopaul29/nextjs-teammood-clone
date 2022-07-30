@@ -1,12 +1,17 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
+import MoodForm from "../components/MoodForm";
 import prisma from "../lib/prisma";
+import Script from "next/script";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 export default function Home({ projects, users }) {
 	const [state, setState] = useState({});
 
 	return (
-		<div>
+		<div className="p-10 mx-auto max-w-4xl flex flex-col min-h-screen">
 			<Head>
 				<title>PlanetScale & Hashnode Hackathon - Teammood clone</title>
 				<meta
@@ -16,66 +21,40 @@ export default function Home({ projects, users }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className="p-10 mx-auto max-w-4xl">
+			<Header />
+			<main className="mt-20 flex-1 mx-auto p-8">
 				<h1 className="text-6xl font-bold mb-4 text-center">Teammood clone</h1>
 				<p className="mb-20 text-xl text-center">
 					🔥 PlanetScale & Hashnode Hackathon 🔥
 				</p>
-				<form className="form-flow ">
-					<div className="select-user">
-						<label className="block">
-							<span className="text-gray-700">Select a user</span>
-							<select
-								className="block w-full mt-1
-                "
-								name="userId"
-							>
-								{users.map((user) => (
-									<option value={user.id} key={user.id}>
-										{user.username}
-									</option>
-								))}
-							</select>
-						</label>
-					</div>
-					<div className="select-project">
-						<label className="block">
-							<span className="text-gray-700">Choose your project</span>
-							<select
-								className="block w-full mt-1
-                "
-								name="projectId"
-							>
-								{projects.map((project) => (
-									<option value={project.id} key={project.id}>
-										{project.name}
-									</option>
-								))}
-							</select>
-						</label>
-					</div>
-					<div className="select-mood">
-						<label className="block">
-							<span className="text-gray-700">How is your day?</span>
-							<select
-								className="block w-full mt-1
-                "
-								name="mood"
-							>
-								<option>:&apos;(</option>
-								<option>:(</option>
-								<option>:|</option>
-								<option>:)</option>
-								<option>;)</option>
-							</select>
-						</label>
-					</div>
-					<submit className="button">Submit</submit>
-				</form>
+				{/* <Posts projects={projects} />
+				<MoodForm users={users} projects={projects} /> */}
 			</main>
 
-			<footer></footer>
+			<Footer />
+			<Script
+				id="stripe-js"
+				src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"
+			/>
 		</div>
+	);
+}
+
+function Posts({ projects }) {
+	return (
+		<ul>
+			{projects.map((project) => (
+				<li key={project.id}>
+					<Link
+						href={`/project/${encodeURIComponent(
+							project.name.replace(" ", "_")
+						)}`}
+					>
+						<a>{project.name}</a>
+					</Link>
+				</li>
+			))}
+		</ul>
 	);
 }
 
