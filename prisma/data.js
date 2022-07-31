@@ -1,45 +1,44 @@
-const {
-  Prisma
-} = require('@prisma/client');
+const { Prisma } = require("@prisma/client");
 
-const users = [{
-    //"company": "Kuhic, Haley and Bosco",
-    "username": "Dalton.Connelly",
-    //"role": "user",
-  },
-  {
-    //"company": "MacGyver Inc",
-    "username": "Keagan33",
-    //"role": "user",
-  },
-  {
-    //"company": "Rutherford, Stamm and Hickle",
-    "username": "Anika_Watsica",
-    //"role": "administrator",
-  },
-  {
-    //"company": "Ward - Medhurst",
-    "username": "Muhammad.Ritchie4",
-    //"role": "administrator"
-  }, {
-    //"company": "Beatty and Sons",
-    "username": "Cloyd19",
-    //"role": "administrator",
-  }
+const users = [
+	{
+		username: "Dalton.Connelly",
+		projectId: 1,
+	},
+	{
+		username: "Keagan33",
+		projectId: 1,
+	},
+	{
+		username: "Anika_Watsica",
+		projectId: 1,
+	},
+	{
+		username: "Muhammad.Ritchie4",
+		projectId: 1,
+	},
+	{
+		username: "Cloyd19",
+		projectId: 1,
+	},
 ];
 
-const projects = [{
-    name: 'HUSKY ADVICE',
-  },
-  {
-    name: 'BEST ENGINE',
-  },
-  {
-    name: 'BIG EFFICACIOUS CORN',
-  }
+const projects = [
+	{
+		name: "HUSKY ADVICE",
+	},
+];
+
+const moods = [
+	{
+		userId: 1,
+		projectId: 1,
+		mood: 3,
+	},
 ];
 
 module.exports = {
-  projects,
-  users,
+	projects,
+	users,
+	moods,
 };
