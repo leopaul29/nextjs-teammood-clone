@@ -2,19 +2,33 @@ import React from "react";
 
 export default function contribute({ projects, users, moods }) {
 	return (
-		<form>
-			<ul
-				className="stepper"
-				data-mdb-stepper="stepper"
-				data-mdb-stepper-type="vertical"
-			>
-				<li className="stepper-step stepper-active">
-					<div className="stepper-head">
-						<span className="stepper-head-icon"> 1 </span>
-						<span className="stepper-head-text"> Select a user </span>
-					</div>
-					<div className="stepper-content">
-						<select className="" name="userId">
+		<>
+			<div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+				<form action="/api/form" method="post">
+					<div className="form-group mb-6">
+						<select
+							name="user"
+							className="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+							aria-label="Default select example"
+							required
+						>
+							<option selected value="">
+								Select a user
+							</option>
 							{users.map((user) => (
 								<option value={user.id} key={user.id}>
 									{user.username}
@@ -22,14 +36,30 @@ export default function contribute({ projects, users, moods }) {
 							))}
 						</select>
 					</div>
-				</li>
-				<li className="stepper-step">
-					<div className="stepper-head">
-						<span className="stepper-head-icon"> 2 </span>
-						<span className="stepper-head-text"> Select a project </span>
-					</div>
-					<div className="stepper-content">
-						<select className="" name="projectId">
+					<div className="form-group mb-6">
+						<select
+							name="project"
+							className="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+							aria-label="Default select example"
+							required
+						>
+							<option selected value="">
+								Select a project
+							</option>
 							{projects.map((project) => (
 								<option value={project.id} key={project.id}>
 									{project.name}
@@ -37,14 +67,30 @@ export default function contribute({ projects, users, moods }) {
 							))}
 						</select>
 					</div>
-				</li>
-				<li className="stepper-step">
-					<div className="stepper-head">
-						<span className="stepper-head-icon"> 3 </span>
-						<span className="stepper-head-text"> How is your day? </span>
-					</div>
-					<div className="stepper-content">
-						<select className="" name="moodId">
+					<div className="form-group form-check text-center mb-6">
+						<select
+							name="mood"
+							className="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+							aria-label="Default select example"
+							required
+						>
+							<option selected value="">
+								How are you today?
+							</option>
 							{moods.map((mood) => (
 								<option value={mood.id} key={mood.id}>
 									{mood.mood}
@@ -52,12 +98,11 @@ export default function contribute({ projects, users, moods }) {
 							))}
 						</select>
 					</div>
-				</li>
-			</ul>
-			<button
-				type="submit"
-				className="
-	  px-6
+					<button
+						type="submit"
+						className="
+      w-full
+      px-6
       py-2.5
       bg-blue-600
       text-white
@@ -73,10 +118,12 @@ export default function contribute({ projects, users, moods }) {
       transition
       duration-150
       ease-in-out"
-			>
-				Submit
-			</button>
-		</form>
+					>
+						Submit
+					</button>
+				</form>
+			</div>
+		</>
 	);
 }
 
