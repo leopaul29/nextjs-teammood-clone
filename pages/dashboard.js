@@ -1,35 +1,46 @@
-import Link from "next/link";
 import React from "react";
+import Mood from "../components/Mood";
 import prisma from "../lib/prisma";
 
-export default function Dashboard({ projects }) {
-	console.log("test", projects);
+export default function Dashboard({ project, users, moods }) {
 	return (
 		<div>
-			<h1>Projects</h1>
-			<ul>
-				{projects.map((project) => {
-					return (
-						<li key={project.id}>
-							<Link href={`/project/${project.id}`}>
-								<a>{project.name}</a>
-							</Link>
-						</li>
-					);
-				})}
-			</ul>
+			<h4 className="text-gray-800 font-semibold text-xl mb-1.5">
+				PROJECT: {project.name}
+			</h4>
+
+			<Mood moods={moods} users={users} />
 		</div>
 	);
 }
 
 export async function getStaticProps(context) {
-	const projectData = await prisma.project.findMany();
+	const projectData = await prisma.project.findUnique({
+		where: {
+			id: 1,
+		},
+	});
 
-	const projects = projectData.map((project) => ({
-		...project,
+	const userData = await prisma.user.findMany();
+
+	const users = userData.map((user) => ({
+		...user,
 	}));
 
+	const moodsData = await prisma.mood.findMany({
+		where: {
+			projectId: 1,
+		},
+		orderBy: {
+			date: "desc",
+		},
+	});
+
 	return {
-		props: { projects },
+		props: {
+			project: projectData,
+			users: users,
+			moods: JSON.parse(JSON.stringify(moodsData)),
+		},
 	};
 }
