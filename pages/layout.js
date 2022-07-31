@@ -3,11 +3,11 @@ import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 import Script from "next/script";
 
-export default function RootLayout({ children, projects }) {
+export default function RootLayout({ children }) {
 	return (
 		<html>
 			<body className="flex flex-col min-h-screen">
-				<Header projects={projects} />
+				<Header />
 				<div className="container mt-20 flex-1 mx-auto p-8">{children}</div>
 				<Footer />
 				<Script
@@ -17,16 +17,4 @@ export default function RootLayout({ children, projects }) {
 			</body>
 		</html>
 	);
-}
-
-export async function getServerSideProps(context) {
-	const projectData = await prisma.project.findMany();
-
-	const projects = projectData.map((project) => ({
-		...project,
-	}));
-
-	return {
-		props: { projects },
-	};
 }
