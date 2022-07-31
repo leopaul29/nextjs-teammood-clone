@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import Router from "next/router";
 
-export default function contribute({ projects, users, moods }) {
+export default function contribute1({ projects, users, moods }) {
+	const handleSubmit = async (event) => {
+		// Stop the form from submitting and refreshing the page.
+		event.preventDefault();
+
+		try {
+			// Get data from the form.
+			const data = {
+				user: event.target.user.value,
+				project: event.target.project.value,
+				mood: event.target.mood.value,
+			};
+
+			// Send the data to the server in JSON format.
+			const JSONdata = JSON.stringify(data);
+
+			// API endpoint where we send form data.
+			const endpoint = "/api/form";
+
+			// Form the request for sending data to the server.
+			const options = {
+				// The method is POST because we are sending data.
+				method: "POST",
+				// Tell the server we're sending JSON.
+				headers: {
+					"Content-Type": "application/json",
+				},
+				// Body of the request is the JSON data we created above.
+				body: JSONdata,
+			};
+			// Send the form data to our forms API on Vercel and get a response.
+			const response = await fetch(endpoint, options);
+
+			// Get the response data from server as JSON.
+			// If server returns the name submitted, that means the form works.
+			const result = await response.json();
+			console.log(result);
+			if (result) {
+				await Router.push("/dashboard");
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<>
 			<div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-				<form action="/api/form" method="post">
+				<form onSubmit={handleSubmit}>
 					<div className="form-group mb-6">
 						<select
 							name="user"
@@ -57,9 +102,9 @@ export default function contribute({ projects, users, moods }) {
 							aria-label="Default select example"
 							required
 						>
-							<option selected value="">
+							{/* <option selected value="">
 								Select a project
-							</option>
+							</option> */}
 							{projects.map((project) => (
 								<option value={project.id} key={project.id}>
 									{project.name}
