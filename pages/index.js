@@ -1,14 +1,6 @@
-import Link from "next/link";
 import Head from "next/head";
-import { useState } from "react";
-import MoodForm from "../components/MoodForm";
-import prisma from "../lib/prisma";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
 
-export default function Home({ projects, users }) {
-	const [state, setState] = useState({});
-
+export default function Home() {
 	return (
 		<div className="p-10 mx-auto max-w-4xl ">
 			<Head>
@@ -28,41 +20,4 @@ export default function Home({ projects, users }) {
 			</main>
 		</div>
 	);
-}
-
-function Posts({ projects }) {
-	return (
-		<ul>
-			{projects.map((project) => (
-				<li key={project.id}>
-					<Link
-						href={`/project/${encodeURIComponent(
-							project.name.replace(" ", "_")
-						)}`}
-					>
-						<a>{project.name}</a>
-					</Link>
-				</li>
-			))}
-		</ul>
-	);
-}
-
-export async function getStaticProps(context) {
-	const projectData = await prisma.project.findMany();
-
-	const projects = projectData.map((project) => ({
-		...project,
-	}));
-
-	const userData = await prisma.user.findMany();
-
-	const users = userData.map((user) => ({
-		...user,
-	}));
-
-	const moods = [":&apos;(", ":(", ":|", ":)", ";)"];
-	return {
-		props: { projects, users },
-	};
 }

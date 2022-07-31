@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import prisma from "../lib/prisma";
 
 export default function Dashboard({ projects }) {
 	console.log("test", projects);
