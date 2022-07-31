@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import prisma from "../lib/prisma";
 import Router from "next/router";
 
 export default function contribute1({ projects, users, moods }) {
